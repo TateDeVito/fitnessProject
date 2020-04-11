@@ -2,23 +2,30 @@ import React, { useState } from "react";
 import {
   Card,
   CardContent,
+  Checkbox,
+  IconButton,
   List,
   ListItem,
-  Typography
+  Typography,
+  TextField
 } from "@material-ui/core";
+import { Edit } from "@material-ui/icons";
 
 export default function Workout() {
-  // TODO: A workout is made up of
-  // A name (editable)
+  // TODO: Make name, and exercise list editable
   const [name, setName] = useState<string>("Workout Name");
 
   // A List of exercises --> what is in an exercise? (editable)
-  const [exercises, setExercises] = useState(["Bench Press", "Pull Ups"]);
+  const [exercises, setExercises] = useState([
+    // TODO: External component
+    { name: "Bench Press" },
+    { name: "Pull Ups" }
+  ]);
 
   // A location?
 
   // A notes section
-  const [notes, setNotes] = useState<string>("Notes...");
+  const [notes, setNotes] = useState<string>("");
 
   // TODO: A section for comments?
 
@@ -28,7 +35,8 @@ export default function Workout() {
         {/* Maps exercises to the list */}
         {exercises.map(exercise => (
           <ListItem>
-            <Typography component="h1">{exercise}</Typography>
+            <Typography component="h1">{exercise.name}</Typography>
+            <Checkbox></Checkbox>
           </ListItem>
         ))}
       </List>
@@ -40,14 +48,26 @@ export default function Workout() {
       <Card>
         <CardContent>
           {/* TODO: Name */}
-          <Typography component="h2">
+          <IconButton edge="end" size="small">
+            <Edit></Edit>
+          </IconButton>
+          <Typography component="p">
             <b>{name}</b>
           </Typography>
-          {/* TODO: List of exercises */}
+          {/* TODO: Make name, and exercise list editable */}
+          {/* List of exercises */}
           <ExerciseList />
           {/* Notes */}
-          __________________________________
-          <Typography component="p">{notes}</Typography>
+          <TextField
+            multiline
+            label="Notes"
+            rowsMax="4"
+            defaultValue={notes}
+            variant="outlined"
+            onChange={event => {
+              setNotes(event.target.value);
+            }}
+          />
         </CardContent>
       </Card>
     </div>

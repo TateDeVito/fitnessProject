@@ -13,7 +13,7 @@ export default function WorkoutScreen() {
             <Typography color="secondary" variant="h6">
               <b>Welcome {props.name} !</b>
             </Typography>
-            <Avatar>{props.name[0]}</Avatar>
+            {/* <Avatar>{props.name[0]}</Avatar> */}
           </Toolbar>
         </AppBar>
       </div>
