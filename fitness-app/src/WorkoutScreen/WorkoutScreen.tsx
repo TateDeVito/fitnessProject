@@ -8,6 +8,7 @@ import {
   CardContent,
   CardMedia
 } from "@material-ui/core";
+import Workout from "./Workout/Workout";
 
 export default function WorkoutScreen() {
   // A profile bar has a name of user, and an avatar in the top corner
