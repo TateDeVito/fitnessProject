@@ -8,7 +8,7 @@ import {
   CardContent,
   CardMedia
 } from "@material-ui/core";
-import Workout from "./Workout/Workout";
+import Routine from "./Routine/Routine";
 
 export default function WorkoutScreen() {
   // A profile bar has a name of user, and an avatar in the top corner
@@ -50,6 +50,9 @@ export default function WorkoutScreen() {
     <div>
       <NavBar name="Tate" />
       <ProfileCard name="Tate" />
+      <br />
+      <Routine />
+      <br />
     </div>
   );
 }

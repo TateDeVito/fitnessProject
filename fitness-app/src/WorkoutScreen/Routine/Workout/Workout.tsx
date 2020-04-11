@@ -48,9 +48,9 @@ export default function Workout() {
       <Card>
         <CardContent>
           {/* TODO: Name */}
-          <IconButton edge="end" size="small">
+          {/* <IconButton edge="end" size="small">
             <Edit></Edit>
-          </IconButton>
+          </IconButton> */}
           <Typography component="p">
             <b>{name}</b>
           </Typography>
