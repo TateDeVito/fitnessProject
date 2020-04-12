@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   Checkbox,
+  Fab,
   IconButton,
   List,
   ListItem,
@@ -10,6 +11,7 @@ import {
   TextField
 } from "@material-ui/core";
 import { Edit, Delete } from "@material-ui/icons";
+import AddIcon from "@material-ui/icons/Add";
 
 export default function Workout() {
   // TODO: Make name, and exercise list editable
@@ -24,8 +26,8 @@ export default function Workout() {
 
   // A location?
 
-  // A notes section
-  const [notes, setNotes] = useState<string>("");
+  // TODO: A notes section
+  // const [notes, setNotes] = useState<string>("");
 
   // Edit button
   // An edit mode; when on, add and delete workouts will show up
@@ -65,6 +67,15 @@ export default function Workout() {
     return;
   }
 
+  function AddExercise() {
+    // Has a button that, when clicked, shows a textfield that can be filled out with a new exercise
+    return (
+      <Fab size="small" color="primary">
+        <AddIcon />
+      </Fab>
+    );
+  }
+
   return (
     <div>
       <Card>
@@ -79,17 +90,8 @@ export default function Workout() {
           {/* TODO: Make name, and exercise list editable */}
           {/* List of exercises */}
           <ExerciseList />
-          {/* Notes */}
-          <TextField
-            multiline
-            label="Notes"
-            rowsMax="4"
-            defaultValue={notes}
-            variant="outlined"
-            onChange={event => {
-              setNotes(event.target.value);
-            }}
-          />
+          <AddExercise />
+          <br />
         </CardContent>
       </Card>
     </div>
