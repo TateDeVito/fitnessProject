@@ -9,7 +9,7 @@ import {
   Typography,
   TextField
 } from "@material-ui/core";
-import { Edit } from "@material-ui/icons";
+import { Edit, Delete } from "@material-ui/icons";
 
 export default function Workout() {
   // TODO: Make name, and exercise list editable
@@ -27,20 +27,42 @@ export default function Workout() {
   // A notes section
   const [notes, setNotes] = useState<string>("");
 
-  // TODO: A section for comments?
+  // Edit button
+  // An edit mode; when on, add and delete workouts will show up
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   function ExerciseList() {
+    let deleteButton = <div />;
+
+    // function deleteExercise(props) {}
+
+    if (editMode) {
+      deleteButton = (
+        <IconButton size="small">
+          <Delete />
+        </IconButton>
+      );
+    }
+
     return (
       <List>
         {/* Maps exercises to the list */}
         {exercises.map(exercise => (
           <ListItem>
             <Typography component="h1">{exercise.name}</Typography>
-            <Checkbox></Checkbox>
+            <Checkbox />
+            {/* TODO: If this gets clicked, the state containing exercises must be 
+            adjusted so that this exercise is not in it */}
+            {deleteButton}
           </ListItem>
         ))}
       </List>
     );
+  }
+
+  function EditToggle() {
+    setEditMode(!editMode);
+    return;
   }
 
   return (
@@ -48,9 +70,9 @@ export default function Workout() {
       <Card>
         <CardContent>
           {/* TODO: Name */}
-          {/* <IconButton edge="end" size="small">
-            <Edit></Edit>
-          </IconButton> */}
+          <IconButton size="small" onClick={EditToggle}>
+            <Edit />
+          </IconButton>
           <Typography component="p">
             <b>{name}</b>
           </Typography>
