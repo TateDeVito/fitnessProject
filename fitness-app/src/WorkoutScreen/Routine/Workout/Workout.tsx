@@ -7,6 +7,9 @@ import {
   IconButton,
   List,
   ListItem,
+  MenuList,
+  MenuItem,
+  Paper,
   Typography,
   TextField
 } from "@material-ui/core";
@@ -14,29 +17,18 @@ import { Edit, Delete } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 
 export default function Workout() {
-  // TODO: Make name, and exercise list editable
   const [name, setName] = useState<string>("Workout Name");
-
-  // A List of exercises --> what is in an exercise? (editable)
   const [exercises, setExercises] = useState([
-    // TODO: External component
+    // TODO: External exercise component
     { name: "Bench Press" },
     { name: "Pull Ups" }
   ]);
-
-  // A location?
-
-  // TODO: A notes section
-  // const [notes, setNotes] = useState<string>("");
-
-  // Edit button
-  // An edit mode; when on, add and delete workouts will show up
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [addMode, setAddMode] = useState<boolean>(false);
+  // TODO: location?
 
   function ExerciseList() {
     let deleteButton = <div />;
-
-    // function deleteExercise(props) {}
 
     if (editMode) {
       deleteButton = (
@@ -62,25 +54,41 @@ export default function Workout() {
     );
   }
 
-  function EditToggle() {
+  const EditToggle = () => {
     setEditMode(!editMode);
     return;
-  }
+  };
+
+  const AddToggle = () => {
+    setAddMode(!addMode);
+    return;
+  };
 
   function AddExercise() {
-    // Has a button that, when clicked, shows a textfield that can be filled out with a new exercise
-    return (
-      <Fab size="small" color="primary">
-        <AddIcon />
-      </Fab>
-    );
+    // TODO: Build a select once this is clicked that allows a user to pick from two options
+    // TODO: Option 1: Create new: a small floating text field to add an exercise
+    // TODO: Option 2: Must be able to look through saved workouts and pick from exercises there
+
+    let addMenu = <Paper />;
+
+    if (addMode) {
+      addMenu = (
+        <Paper>
+          <MenuList color="primary">
+            <MenuItem>Create new workout</MenuItem>
+            <MenuItem>Add from saved</MenuItem>
+          </MenuList>
+        </Paper>
+      );
+    }
+
+    return <div>{addMenu}</div>;
   }
 
   return (
     <div>
       <Card>
         <CardContent>
-          {/* TODO: Name */}
           <IconButton size="small" onClick={EditToggle}>
             <Edit />
           </IconButton>
@@ -88,12 +96,13 @@ export default function Workout() {
             <b>{name}</b>
           </Typography>
           {/* TODO: Make name, and exercise list editable */}
-          {/* List of exercises */}
           <ExerciseList />
-          <AddExercise />
-          <br />
+          <Fab size="small" color="primary" onClick={AddToggle}>
+            <AddIcon />
+          </Fab>
         </CardContent>
       </Card>
+      <AddExercise />
     </div>
   );
 }
