@@ -18,9 +18,6 @@ export default function WorkoutScreen() {
         <AppBar color="inherit">
           <Toolbar>
             <Button color="secondary">Login</Button>
-            <Typography color="secondary" variant="h6">
-              <b>Welcome!</b>
-            </Typography>
           </Toolbar>
         </AppBar>
       </div>
@@ -50,9 +47,7 @@ export default function WorkoutScreen() {
     <div>
       <NavBar name="Tate" />
       <ProfileCard name="Tate" />
-      <br />
       <Routine />
-      <br />
     </div>
   );
 }

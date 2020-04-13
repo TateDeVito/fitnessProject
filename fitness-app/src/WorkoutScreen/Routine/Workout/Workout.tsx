@@ -27,6 +27,7 @@ export default function Workout() {
   const [addMode, setAddMode] = useState<boolean>(false);
   // TODO: location?
 
+  // This should be broken out to another component, and then exercises should
   function ExerciseList() {
     let deleteButton = <div />;
 
@@ -42,6 +43,7 @@ export default function Workout() {
       <List>
         {/* Maps exercises to the list */}
         {exercises.map(exercise => (
+          // TODO: Every exercise needs a key
           <ListItem>
             <Typography component="h1">{exercise.name}</Typography>
             <Checkbox />
@@ -65,9 +67,9 @@ export default function Workout() {
   };
 
   function AddExercise() {
-    // TODO: Build a select once this is clicked that allows a user to pick from two options
-    // TODO: Option 1: Create new: a small floating text field to add an exercise
-    // TODO: Option 2: Must be able to look through saved workouts and pick from exercises there
+    // TODO: Make it so this adds an exercise
+    // Idea 1 --> have two options of adding an exercise; this actually may be too much work,
+    // Idea 2 --> Maybe this button just has an add button, and other workouts seen below have an add button also
 
     let addMenu = <Paper />;
 
@@ -92,9 +94,7 @@ export default function Workout() {
           <IconButton size="small" onClick={EditToggle}>
             <Edit />
           </IconButton>
-          <Typography component="p">
-            <b>{name}</b>
-          </Typography>
+          <Typography component="h2">{name}</Typography>
           {/* TODO: Make name, and exercise list editable */}
           <ExerciseList />
           <Fab size="small" color="primary" onClick={AddToggle}>
