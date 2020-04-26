@@ -9,7 +9,6 @@ import {
   CardContent,
 } from "@material-ui/core";
 import Routine from "./Routine/Routine";
-import SavedGallery from "./SavedGallery/SavedGallery";
 
 export default function WorkoutScreen() {
   // A profile bar has a name of user, and an avatar in the top corner
