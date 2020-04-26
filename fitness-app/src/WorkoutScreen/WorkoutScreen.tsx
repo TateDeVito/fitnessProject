@@ -1,12 +1,12 @@
 import React from "react";
 import {
   AppBar,
+  Container,
   Toolbar,
   Typography,
   Button,
   Card,
   CardContent,
-  CardMedia
 } from "@material-ui/core";
 import Routine from "./Routine/Routine";
 
@@ -29,25 +29,21 @@ export default function WorkoutScreen() {
       <div>
         <Card>
           <CardContent>
-            <Typography component="h2">
-              <b>{props.name}</b>
-            </Typography>
+            <b>{props.name}</b>
             <Typography component="p">
               Favorite Sports: Surfing, Soccer
             </Typography>
           </CardContent>
-          {/* TODO: Avatar? */}
-          <CardMedia component="img" />
         </Card>
       </div>
     );
   }
 
   return (
-    <div>
-      <NavBar name="Tate" />
+    <Container fixed>
       <ProfileCard name="Tate" />
+      <br />
       <Routine />
-    </div>
+    </Container>
   );
 }

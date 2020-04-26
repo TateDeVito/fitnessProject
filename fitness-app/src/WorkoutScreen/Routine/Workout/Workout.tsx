@@ -7,11 +7,8 @@ import {
   IconButton,
   List,
   ListItem,
-  MenuList,
-  MenuItem,
   Paper,
   Typography,
-  TextField
 } from "@material-ui/core";
 import { Edit, Delete } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
@@ -21,7 +18,7 @@ export default function Workout() {
   const [exercises, setExercises] = useState([
     // TODO: External exercise component
     { name: "Bench Press" },
-    { name: "Pull Ups" }
+    { name: "Pull Ups" },
   ]);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [addMode, setAddMode] = useState<boolean>(false);
@@ -42,10 +39,10 @@ export default function Workout() {
     return (
       <List>
         {/* Maps exercises to the list */}
-        {exercises.map(exercise => (
+        {exercises.map((exercise) => (
           // TODO: Every exercise needs a key
-          <ListItem>
-            <Typography component="h1">{exercise.name}</Typography>
+          <ListItem divider={true}>
+            <Typography component="p">{exercise.name}</Typography>
             <Checkbox />
             {/* TODO: If this gets clicked, the state containing exercises must be 
             adjusted so that this exercise is not in it */}
@@ -70,38 +67,24 @@ export default function Workout() {
     // TODO: Make it so this adds an exercise
     // Idea 1 --> have two options of adding an exercise; this actually may be too much work,
     // Idea 2 --> Maybe this button just has an add button, and other workouts seen below have an add button also
-
-    let addMenu = <Paper />;
-
-    if (addMode) {
-      addMenu = (
-        <Paper>
-          <MenuList color="primary">
-            <MenuItem>Create new workout</MenuItem>
-            <MenuItem>Add from saved</MenuItem>
-          </MenuList>
-        </Paper>
-      );
-    }
-
-    return <div>{addMenu}</div>;
+    // Third idea, maybe just when you hit the add button, automatically enable these options
+    return <div />;
   }
 
   return (
     <div>
-      <Card>
-        <CardContent>
-          <IconButton size="small" onClick={EditToggle}>
+      <Paper>
+        {/* TODO: Determine if this is needed when add feature is looked at further */}
+        {/* <IconButton size="small" onClick={EditToggle}>
             <Edit />
-          </IconButton>
-          <Typography component="h2">{name}</Typography>
-          {/* TODO: Make name, and exercise list editable */}
-          <ExerciseList />
-          <Fab size="small" color="primary" onClick={AddToggle}>
-            <AddIcon />
-          </Fab>
-        </CardContent>
-      </Card>
+          </IconButton> */}
+        <Typography component="h2">{name}</Typography>
+        {/* TODO: Make name, and exercise list editable */}
+        <ExerciseList />
+        <Fab size="small" color="primary" onClick={AddToggle}>
+          <AddIcon />
+        </Fab>
+      </Paper>
       <AddExercise />
     </div>
   );
