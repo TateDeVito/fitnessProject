@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Checkbox,
+  Grid,
   List,
   ListItem,
   ListItemSecondaryAction,
@@ -8,30 +9,38 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
+import { Edit, Delete } from "@material-ui/icons";
 
 export default function Workout() {
-  const [name, setName] = useState<string>("Workout Name");
-  const [exercises, setExercises] = useState([
-    // TODO: External exercise component
-    { name: "Bench Press" },
-    { name: "Pull Ups" },
+  const [name, setName] = useState<string>("Workout");
+  const [editToggle, setEditToggle] = useState<boolean>(false);
+  const [exercises, setExercises] = useState<Object[]>([
+    // { name: "ExerciseName" }
   ]);
 
-  // This should be broken out to another component, and then exercises should
-  function ExerciseList() {
+  const editButton = (
+    // TODO: Edit functionality
+    <IconButton
+      color="inherit"
+      onClick={() => {
+        setEditToggle(!editToggle);
+        console.log(editToggle);
+      }}
+    >
+      <Edit />
+    </IconButton>
+  );
+
+  const ExerciseList = () => {
     return (
       <List>
-        {/* Maps exercises to the list */}
         {exercises.map((exercise) => (
           // TODO: Every exercise needs a key
-          <ListItem divider={true}>
-            <Typography component="p">{exercise.name}</Typography>
+          <ListItem>
+            <Typography component="p">{exercise}</Typography>
             <Checkbox />
             <ListItemSecondaryAction>
               <IconButton>
-                {/* TODO: If this gets clicked, the state containing exercises must be 
-            adjusted so that this exercise is not in it */}
                 <Delete />
               </IconButton>
             </ListItemSecondaryAction>
@@ -39,20 +48,23 @@ export default function Workout() {
         ))}
       </List>
     );
-  }
-
-  // TODO: This should add an exercise to the end of the workout
-  function AddExercise(exercise: string) {
-    return;
-  }
+  };
 
   return (
-    <div>
-      <Paper>
-        <Typography component="h2">{name}</Typography>
-        {/* TODO: Make name, and exercise list editable */}
-        <ExerciseList />
-      </Paper>
-    </div>
+    <Paper>
+      <Grid container direction="row" alignItems="center" spacing={1}>
+        <Grid item xs={8}>
+          <Typography component="h3">{name}</Typography>
+        </Grid>
+        <Grid item xs={4}>
+          {editButton}
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item>
+          <ExerciseList />
+        </Grid>
+      </Grid>
+    </Paper>
   );
 }

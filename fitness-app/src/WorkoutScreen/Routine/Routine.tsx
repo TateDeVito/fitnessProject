@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Fab } from "@material-ui/core";
+import { Grid, Fab, Typography } from "@material-ui/core";
 import Workout from "./Workout/Workout";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -9,10 +9,32 @@ export default function Routine() {
   // and you can scroll through the others
   //TODO: Should have a progress bar to show how far along the length it is
 
-  // TODO: This has to be an array of Workouts specifically
-  const [workoutQueue, setWorkoutQueue] = useState<Object[]>([{}]);
+  const [routineName, setRoutineName] = useState<string>("Untitled");
+  const [workoutQueue, setWorkoutQueue] = useState<Object[]>([]);
 
-  const workoutRow = (
+  let RoutineLabel;
+  if (workoutQueue.length < 1) {
+    RoutineLabel = (
+      <Grid item>
+        <Typography component="h2">
+          You can create your first workout with the button below!
+        </Typography>
+      </Grid>
+    );
+  } else {
+    RoutineLabel = (
+      <Grid item>
+        {/* TODO: onClick here should allow you to cycle through different routines
+        that a user has to potentially switch */}
+        <Typography component="h1" onClick={() => console.log(routineName)}>
+          {routineName}
+        </Typography>
+      </Grid>
+    );
+  }
+
+  // TODO: workouts need unique keys
+  const WorkoutRow = (
     <Grid
       container
       spacing={1}
@@ -28,23 +50,26 @@ export default function Routine() {
     </Grid>
   );
 
-  const addButton = (
+  const AddButton = (
     <Grid item spacing={1}>
-      <Fab size="medium" color="secondary">
-        <AddIcon
-          // TODO: expand onClick functionality; possibly add general add workout function
-          onClick={() => {
-            setWorkoutQueue([...workoutQueue, {}]);
-          }}
-        />
+      <Fab
+        size="medium"
+        color="secondary"
+        // TODO: expand onClick functionality; possibly add general add workout function
+        onClick={() => {
+          setWorkoutQueue([...workoutQueue, {}]);
+        }}
+      >
+        <AddIcon />
       </Fab>
     </Grid>
   );
 
   return (
     <Grid container spacing={2}>
-      {workoutRow}
-      {addButton}
+      {RoutineLabel}
+      {WorkoutRow}
+      {AddButton}
     </Grid>
   );
 }
