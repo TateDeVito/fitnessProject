@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Fab, Typography } from "@material-ui/core";
 import Workout from "./Workout/Workout";
+import WorkoutForm from "./WorkoutForm/WorkoutForm";
 import AddIcon from "@material-ui/icons/Add";
 
 export default function Routine() {
@@ -27,7 +28,7 @@ export default function Routine() {
         {/* TODO: onClick here should allow you to cycle through different routines
         that a user has to potentially switch */}
         <Typography component="h1" onClick={() => console.log(routineName)}>
-          {routineName}
+          {routineName} - {workoutQueue.length} workout(s)
         </Typography>
       </Grid>
     );
@@ -50,26 +51,29 @@ export default function Routine() {
     </Grid>
   );
 
-  const AddButton = (
-    <Grid item spacing={1}>
-      <Fab
-        size="medium"
-        color="secondary"
-        // TODO: expand onClick functionality; possibly add general add workout function
-        onClick={() => {
-          setWorkoutQueue([...workoutQueue, {}]);
-        }}
-      >
-        <AddIcon />
-      </Fab>
-    </Grid>
-  );
+  function AddButton() {
+    const addBtn = (
+      <Grid item spacing={1}>
+        <Fab
+          size="medium"
+          color="secondary"
+          onClick={() => {
+            setWorkoutQueue([...workoutQueue, {}]);
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      </Grid>
+    );
+
+    return addBtn;
+  }
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={3} justify="center">
       {RoutineLabel}
       {WorkoutRow}
-      {AddButton}
+      {AddButton()}
     </Grid>
   );
 }
