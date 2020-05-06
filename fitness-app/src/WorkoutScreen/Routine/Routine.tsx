@@ -50,10 +50,10 @@ export default function Routine() {
 
   function AddButton() {
     const addBtn = (
-      <Grid item spacing={1}>
+      <Grid item>
         <Fab
           size="medium"
-          color="secondary"
+          color="primary"
           onClick={() => {
             setWorkoutQueue([...workoutQueue, {}]);
           }}
