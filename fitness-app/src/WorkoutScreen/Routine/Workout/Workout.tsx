@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import {
+  Card,
   Checkbox,
   Grid,
   List,
   ListItem,
   ListItemSecondaryAction,
   IconButton,
-  Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
-import { Edit, Delete } from "@material-ui/icons";
+import { AddCircle, Close } from "@material-ui/icons";
 
 export default function Workout() {
-  const [name, setName] = useState<string>("Untitled");
+  const [name, setName] = useState<string>("Workout Name");
   const [editToggle, setEditToggle] = useState<boolean>(false);
-  const [exercises, setExercises] = useState<Object[]>([
-    // { name: "ExerciseName" }
-  ]);
+  const [exercises, setExercises] = useState([{ name: "Exercise1 Name" }]);
 
   let workoutName;
   if (editToggle === true) {
@@ -27,29 +25,17 @@ export default function Workout() {
           variant="filled"
           onChange={(event) => setName(event.target.value)}
           autoComplete={workoutName}
-          placeholder="Workout name"
+          placeholder="Workout name "
         />
       </Grid>
     );
   } else {
     workoutName = (
-      <Grid item xs={8}>
+      <Grid item>
         <Typography component="h3">{name}</Typography>
       </Grid>
     );
   }
-
-  const editButton = (
-    <IconButton
-      color="inherit"
-      onClick={() => {
-        setEditToggle(!editToggle);
-        console.log(editToggle);
-      }}
-    >
-      <Edit />
-    </IconButton>
-  );
 
   const ExerciseList = () => {
     return (
@@ -57,12 +43,12 @@ export default function Workout() {
         {exercises.map((exercise) => (
           // TODO: Every exercise needs a key
           <ListItem>
-            <Typography component="p">{exercise}</Typography>
+            <Typography component="p">{exercise.name}</Typography>
             <Checkbox />
             <ListItemSecondaryAction>
-              <IconButton>
+              {/* <IconButton>
                 <Delete />
-              </IconButton>
+              </IconButton> */}
             </ListItemSecondaryAction>
           </ListItem>
         ))}
@@ -70,19 +56,44 @@ export default function Workout() {
     );
   };
 
+  let editCloser;
+  if (editToggle) {
+    editCloser = (
+      <Grid item>
+        <IconButton onClick={() => setEditToggle(false)}>
+          <Close />
+        </IconButton>
+      </Grid>
+    );
+  }
+
+  let addExercise;
+  if (editToggle) {
+    addExercise = (
+      <IconButton color="primary">
+        <AddCircle />
+      </IconButton>
+    );
+  }
+
   return (
-    <Paper>
+    <Card
+      onClick={() => {
+        if (!editToggle) {
+          setEditToggle(true);
+        }
+      }}
+    >
       <Grid container direction="row" alignItems="center" spacing={1}>
-        {workoutName}
-        <Grid item xs={4}>
-          {editButton}
-        </Grid>
+        <Grid item>{workoutName}</Grid>
+        {editCloser}
       </Grid>
       <Grid container>
         <Grid item>
           <ExerciseList />
         </Grid>
       </Grid>
-    </Paper>
+      {addExercise}
+    </Card>
   );
 }

@@ -6,9 +6,8 @@ import AddIcon from "@material-ui/icons/Add";
 export default function Routine() {
   //TODO: Should have a current workout - the current should be greatly highlighted,
   // and you can scroll through the others
-  //TODO: Should have a progress bar to show how far along the length it is
 
-  const [routineName, setRoutineName] = useState<string>("Untitled");
+  const [routineName, setRoutineName] = useState<string>("Untitled Routine");
   const [workoutQueue, setWorkoutQueue] = useState<Object[]>([]);
 
   let RoutineLabel;
