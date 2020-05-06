@@ -13,7 +13,6 @@ import ExerciseList from "./ExerciseList/ExerciseList";
 export default function Workout() {
   const [expandToggle, setExpandToggle] = useState<boolean>(false);
   const [name, setName] = useState<string>("Workout Name");
-  const [exercises, setExercises] = useState<string[]>([]);
 
   let workoutName;
   if (expandToggle === true) {
@@ -46,18 +45,6 @@ export default function Workout() {
     );
   }
 
-  let addExercise;
-  if (expandToggle) {
-    addExercise = (
-      <IconButton
-        color="primary"
-        onClick={() => setExercises([...exercises, "New exercise"])}
-      >
-        <AddCircle />
-      </IconButton>
-    );
-  }
-
   return (
     <Card
       onClick={() => {
@@ -72,8 +59,7 @@ export default function Workout() {
       </Grid>
       <Grid container>
         <Grid item>
-          <ExerciseList exercises={exercises} />
-          {addExercise}
+          <ExerciseList editToggle={expandToggle} />
         </Grid>
       </Grid>
     </Card>

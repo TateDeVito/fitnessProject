@@ -53,7 +53,7 @@ export default function Routine() {
       <Grid item spacing={1}>
         <Fab
           size="medium"
-          color="secondary"
+          color="primary"
           onClick={() => {
             setWorkoutQueue([...workoutQueue, {}]);
           }}
