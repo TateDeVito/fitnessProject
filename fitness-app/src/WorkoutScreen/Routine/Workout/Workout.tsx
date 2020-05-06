@@ -3,22 +3,20 @@ import {
   Card,
   Checkbox,
   Grid,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
   IconButton,
   TextField,
   Typography,
 } from "@material-ui/core";
 import { AddCircle, Close } from "@material-ui/icons";
+import ExerciseList from "./ExerciseList/ExerciseList";
 
 export default function Workout() {
+  const [expandToggle, setExpandToggle] = useState<boolean>(false);
   const [name, setName] = useState<string>("Workout Name");
-  const [editToggle, setEditToggle] = useState<boolean>(false);
-  const [exercises, setExercises] = useState([{ name: "Exercise1 Name" }]);
+  const [exercises, setExercises] = useState<string[]>([]);
 
   let workoutName;
-  if (editToggle === true) {
+  if (expandToggle === true) {
     workoutName = (
       <Grid item xs={8}>
         <TextField
@@ -37,30 +35,11 @@ export default function Workout() {
     );
   }
 
-  const ExerciseList = () => {
-    return (
-      <List>
-        {exercises.map((exercise) => (
-          // TODO: Every exercise needs a key
-          <ListItem>
-            <Typography component="p">{exercise.name}</Typography>
-            <Checkbox />
-            <ListItemSecondaryAction>
-              {/* <IconButton>
-                <Delete />
-              </IconButton> */}
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-
   let editCloser;
-  if (editToggle) {
+  if (expandToggle) {
     editCloser = (
       <Grid item>
-        <IconButton onClick={() => setEditToggle(false)}>
+        <IconButton onClick={() => setExpandToggle(false)}>
           <Close />
         </IconButton>
       </Grid>
@@ -68,9 +47,12 @@ export default function Workout() {
   }
 
   let addExercise;
-  if (editToggle) {
+  if (expandToggle) {
     addExercise = (
-      <IconButton color="primary">
+      <IconButton
+        color="primary"
+        onClick={() => setExercises([...exercises, "New exercise"])}
+      >
         <AddCircle />
       </IconButton>
     );
@@ -79,8 +61,8 @@ export default function Workout() {
   return (
     <Card
       onClick={() => {
-        if (!editToggle) {
-          setEditToggle(true);
+        if (!expandToggle) {
+          setExpandToggle(true);
         }
       }}
     >
@@ -90,10 +72,10 @@ export default function Workout() {
       </Grid>
       <Grid container>
         <Grid item>
-          <ExerciseList />
+          <ExerciseList exercises={exercises} />
+          {addExercise}
         </Grid>
       </Grid>
-      {addExercise}
     </Card>
   );
 }
